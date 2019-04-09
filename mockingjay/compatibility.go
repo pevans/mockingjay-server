@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/johnmuth/xmlcompare"
-	"github.com/quii/jsonequaliser"
 	"net"
+
+	"github.com/quii/jsonequaliser"
 )
 
 // CompatibilityChecker is responsible for checking endpoints are compatible
@@ -157,16 +157,18 @@ func checkBody(downstreamBody string, expectedBody string) (errors []string) {
 		return
 	}
 
-	if isXML(expectedBody) {
-		compatible, err := xmlcompare.IsCompatible(expectedBody, downstreamBody)
-		if err != nil {
-			return []string{err.Error()}
+	/*
+		if isXML(expectedBody) {
+			compatible, err := xmlcompare.IsCompatible(expectedBody, downstreamBody)
+			if err != nil {
+				return []string{err.Error()}
+			}
+			if !compatible {
+				return []string{msgXMLNotCompatible}
+			}
+			return
 		}
-		if !compatible {
-			return []string{msgXMLNotCompatible}
-		}
-		return
-	}
+	*/
 
 	if !strings.Contains(downstreamBody, expectedBody) {
 		return []string{msgExactMatchFailed}
